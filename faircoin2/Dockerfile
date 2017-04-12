@@ -1,4 +1,4 @@
-FROM debian:9
+FROM debian:stretch-slim
 
 COPY dpkg-no-doc /etc/dpkg/dpkg.cfg.d/01_nodoc
 
@@ -57,7 +57,9 @@ RUN apt-get update \
       libtool \
       wget \
  && apt-get -y --purge autoremove \
- && rm -fr /var/lib/apt/lists
+ && rm -fr \
+      /usr/local/lib/libbitcoin* \
+      /var/lib/apt/lists
 
 RUN mkdir /faircoin2
 WORKDIR /faircoin2
