@@ -24,9 +24,11 @@ RUN apt-get update \
       cd /faircoin2-master \
  &&   ./autogen.sh \
  &&   ./configure \
+         --disable-bench \
          --disable-tests \
          --disable-wallet \
          --disable-zmq \
+         --without-fasito \
  &&   make -j`nproc` \
  &&   make install \
  &&   strip /usr/local/bin/* \
