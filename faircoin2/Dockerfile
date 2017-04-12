@@ -8,6 +8,7 @@ RUN apt-get update \
       automake \
       build-essential \
       ca-certificates \
+      git \
       libboost-filesystem-dev \
       libboost-program-options-dev \
       libboost-system-dev \
@@ -17,11 +18,9 @@ RUN apt-get update \
       libssl-dev \
       pkg-config \
       libtool \
-      wget \
- && wget -c https://github.com/faircoin/faircoin2/archive/master.tar.gz \
- && tar xfz master.tar.gz \
+ && git clone --depth=1 https://github.com/faircoin/faircoin2 \
  && ( \
-      cd /faircoin2-master \
+      cd faircoin2 \
  &&   ./autogen.sh \
  &&   ./configure \
          --disable-bench \
@@ -33,7 +32,7 @@ RUN apt-get update \
  &&   make install \
  &&   strip /usr/local/bin/* \
     ) \
- && rm -fr master.tar.gz faircoin2-master \
+ && rm -fr faircoin2 \
  && apt-mark manual \
       libevent-2.0-5 \
       libevent-pthreads-2.0-5 \
@@ -46,6 +45,7 @@ RUN apt-get update \
       autoconf \
       automake \
       build-essential \
+      git \
       libboost-filesystem-dev \
       libboost-program-options-dev \
       libboost-system-dev \
