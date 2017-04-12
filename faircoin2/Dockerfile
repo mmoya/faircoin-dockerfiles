@@ -63,4 +63,4 @@ RUN mkdir /faircoin2
 WORKDIR /faircoin2
 
 EXPOSE 40404
-ENTRYPOINT ["faircoind", "-datadir=/faircoin2", "-rpcallowip=0.0.0.0/0", "-printtoconsole"]
+ENTRYPOINT ["faircoind", "-datadir=/faircoin2", "-rpcallowip=0.0.0.0/0"]
