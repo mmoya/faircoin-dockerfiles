@@ -18,6 +18,8 @@ RUN apk --no-cache add \
       openssl \
       openssl-dev \
       pkgconf \
+      zeromq \
+      zeromq-dev \
  && git clone --depth=1 https://github.com/faircoin/faircoin \
  && ( \
       cd faircoin \
@@ -26,10 +28,9 @@ RUN apk --no-cache add \
          --disable-bench \
          --disable-tests \
          --disable-wallet \
-         --disable-zmq \
-	 --with-incompatible-bdb \
+         --with-incompatible-bdb \
          --without-fasito \
-	 --without-libs \
+         --without-libs \
  &&   make -j2 \
  &&   make install \
  &&   strip /usr/local/bin/* \
@@ -46,7 +47,8 @@ RUN apk --no-cache add \
       libtool \
       make \
       openssl-dev \
-      pkgconf
+      pkgconf \
+      zeromq-dev
 
 RUN mkdir /root/.faircoin2
 WORKDIR /root/.faircoin2
