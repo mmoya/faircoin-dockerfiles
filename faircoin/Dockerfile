@@ -18,9 +18,9 @@ RUN apt-get update \
       libssl-dev \
       pkg-config \
       libtool \
- && git clone --depth=1 https://github.com/faircoin/faircoin2 \
+ && git clone --depth=1 https://github.com/faircoin/faircoin \
  && ( \
-      cd faircoin2 \
+      cd faircoin \
  &&   ./autogen.sh \
  &&   ./configure \
          --disable-bench \
@@ -32,7 +32,7 @@ RUN apt-get update \
  &&   make install \
  &&   strip /usr/local/bin/* \
     ) \
- && rm -fr faircoin2 \
+ && rm -fr faircoin \
  && apt-mark manual \
       libevent-2.0-5 \
       libevent-pthreads-2.0-5 \

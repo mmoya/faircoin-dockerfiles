@@ -1,4 +1,4 @@
-IMAGE := mmoya/faircoin2
+IMAGE := mmoya/faircoin
 TAG := latest
 
 build:
