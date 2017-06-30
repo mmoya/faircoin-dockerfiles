@@ -61,8 +61,8 @@ RUN apt-get update \
       /usr/local/lib/libbitcoin* \
       /var/lib/apt/lists
 
-RUN mkdir /faircoin2
-WORKDIR /faircoin2
+RUN mkdir /root/.faircoin2
+WORKDIR /root/.faircoin2
 
 EXPOSE 40404
-ENTRYPOINT ["faircoind", "-datadir=/faircoin2", "-rpcallowip=0.0.0.0/0"]
+ENTRYPOINT ["faircoind", "-rpcallowip=0.0.0.0/0"]
