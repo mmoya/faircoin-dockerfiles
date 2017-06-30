@@ -1,23 +1,23 @@
-FROM debian:stretch-slim
+FROM alpine:3.6
 
-COPY dpkg-no-doc /etc/dpkg/dpkg.cfg.d/01_nodoc
-
-RUN apt-get update \
- && apt-get -Vy --no-install-recommends install \
+RUN apk --no-cache add \
       autoconf \
       automake \
-      build-essential \
+      boost \
+      boost-dev \
+      boost-program_options \
       ca-certificates \
+      db \
+      db-dev \
+      g++ \
       git \
-      libboost-filesystem-dev \
-      libboost-program-options-dev \
-      libboost-system-dev \
-      libboost-thread-dev \
-      libdb++-dev \
+      libevent \
       libevent-dev \
-      libssl-dev \
-      pkg-config \
       libtool \
+      make \
+      openssl \
+      openssl-dev \
+      pkgconf \
  && git clone --depth=1 https://github.com/faircoin/faircoin \
  && ( \
       cd faircoin \
@@ -27,39 +27,26 @@ RUN apt-get update \
          --disable-tests \
          --disable-wallet \
          --disable-zmq \
+	 --with-incompatible-bdb \
          --without-fasito \
- &&   make -j`nproc` \
+	 --without-libs \
+ &&   make -j2 \
  &&   make install \
  &&   strip /usr/local/bin/* \
     ) \
  && rm -fr faircoin \
- && apt-mark manual \
-      libevent-2.0-5 \
-      libevent-pthreads-2.0-5 \
-      libboost-chrono1.62.0 \
-      libboost-filesystem1.62.0 \
-      libboost-program-options1.62.0 \
-      libboost-system1.62.0 \
-      libboost-thread1.62.0 \
- && apt-get -Vy purge \
+ && apk --no-cache del \
       autoconf \
       automake \
-      build-essential \
+      boost-dev \
+      db-dev \
+      g++ \
       git \
-      libboost-filesystem-dev \
-      libboost-program-options-dev \
-      libboost-system-dev \
-      libboost-thread-dev \
-      libdb++-dev \
       libevent-dev \
-      libssl-dev \
-      pkg-config \
       libtool \
-      wget \
- && apt-get -y --purge autoremove \
- && rm -fr \
-      /usr/local/lib/libbitcoin* \
-      /var/lib/apt/lists
+      make \
+      openssl-dev \
+      pkgconf
 
 RUN mkdir /root/.faircoin2
 WORKDIR /root/.faircoin2
