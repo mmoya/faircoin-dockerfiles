@@ -50,8 +50,8 @@ RUN apk --no-cache add \
       pkgconf \
       zeromq-dev
 
-RUN mkdir /root/.faircoin2
-WORKDIR /root/.faircoin2
+RUN mkdir /root/.faircoin-beta
+WORKDIR /root/.faircoin-beta
 
 EXPOSE 40404
 ENTRYPOINT ["faircoind", "-rpcallowip=0.0.0.0/0"]
