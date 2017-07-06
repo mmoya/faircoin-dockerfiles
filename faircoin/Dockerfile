@@ -1,5 +1,8 @@
 FROM alpine:3.6
 
+ENV FAIRCOIN_REV=2ce78b76
+ENV FAIRCOIN_SUM=ff1d7bf569d1eadf4cc27c8d5aac6f03dd9857e8afbeabba9ab5e320a8f48e82
+
 RUN apk --no-cache add \
       autoconf \
       automake \
@@ -10,7 +13,6 @@ RUN apk --no-cache add \
       db \
       db-dev \
       g++ \
-      git \
       libevent \
       libevent-dev \
       libtool \
@@ -20,9 +22,12 @@ RUN apk --no-cache add \
       pkgconf \
       zeromq \
       zeromq-dev \
- && git clone --depth=1 https://github.com/faircoin/faircoin \
+ && export FAIRCOIN_TGZ=${FAIRCOIN_REV}.tar.gz FAIRCOIN_SRC=faircoin-faircoin-${FAIRCOIN_REV:0:7} \
+ && wget -t 0 -O $FAIRCOIN_TGZ https://api.github.com/repos/faircoin/faircoin/tarball/$FAIRCOIN_REV \
+ && sha256sum $FAIRCOIN_TGZ | grep -Eq $FAIRCOIN_SUM \
+ && tar -xz -f $FAIRCOIN_TGZ \
  && ( \
-      cd faircoin \
+      cd $FAIRCOIN_SRC \
  &&   ./autogen.sh \
  &&   ./configure \
          --disable-bench \
@@ -35,14 +40,13 @@ RUN apk --no-cache add \
  &&   make install \
  &&   strip /usr/local/bin/* \
     ) \
- && rm -fr faircoin \
+ && rm -fr $FAIRCOIN_TGZ $FAIRCOIN_SRC \
  && apk --no-cache del \
       autoconf \
       automake \
       boost-dev \
       db-dev \
       g++ \
-      git \
       libevent-dev \
       libtool \
       make \
