@@ -1,7 +1,7 @@
 FROM alpine:3.6
 
-ENV FAIRCOIN_REV=2ce78b76
-ENV FAIRCOIN_SUM=ff1d7bf569d1eadf4cc27c8d5aac6f03dd9857e8afbeabba9ab5e320a8f48e82
+ENV FAIRCOIN_REV=a2ac75a1
+ENV FAIRCOIN_SUM=5e000e86136ed530e67d738aff9d77941fafd8a263e904b3e035c034f925dd7b
 
 RUN apk --no-cache add \
       autoconf \
