@@ -6,7 +6,7 @@ This image runs a [FairCoin][1] Relay Node (ie: without CVN or wallet support).
 
 ```shell
 mkdir faircoin2
-docker run --name faircoin -p 40404:40404 -v $PWD/faircoin2:/root/.faircoin-beta mmoya/faircoin
+docker run --name faircoin -p 40404:40404 -v $PWD/faircoin2:/root/.faircoin2 mmoya/faircoin
 ```
 
 # Querying the server
