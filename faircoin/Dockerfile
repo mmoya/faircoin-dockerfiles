@@ -1,7 +1,7 @@
 FROM alpine:3.6
 
-ENV FAIRCOIN_REV=a2ac75a1
-ENV FAIRCOIN_SUM=5e000e86136ed530e67d738aff9d77941fafd8a263e904b3e035c034f925dd7b
+ENV FAIRCOIN_VER=2.0.0
+ENV FAIRCOIN_SUM=aa1cacf9f489d8f136e6b3d4350a34706c54cd4f16c1468abf6b85147af0b7e2
 
 RUN apk --no-cache add \
       autoconf \
@@ -22,8 +22,8 @@ RUN apk --no-cache add \
       pkgconf \
       zeromq \
       zeromq-dev \
- && export FAIRCOIN_TGZ=${FAIRCOIN_REV}.tar.gz FAIRCOIN_SRC=faircoin-faircoin-${FAIRCOIN_REV:0:7} \
- && wget -t 0 -O $FAIRCOIN_TGZ https://api.github.com/repos/faircoin/faircoin/tarball/$FAIRCOIN_REV \
+ && export FAIRCOIN_TGZ=v${FAIRCOIN_VER}.tar.gz FAIRCOIN_SRC=faircoin-${FAIRCOIN_VER} \
+ && wget -t 0 https://github.com/faircoin/faircoin/archive/$FAIRCOIN_TGZ \
  && sha256sum $FAIRCOIN_TGZ | grep -Eq $FAIRCOIN_SUM \
  && tar -xz -f $FAIRCOIN_TGZ \
  && ( \
